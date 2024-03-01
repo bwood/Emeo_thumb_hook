@@ -11,8 +11,8 @@ cr2 = 21.5;
 
 // Platform variables
 Pw1 = 19;
-Pl1 = 20;
-Pl2 = 15; 
+Pl1 = 26;
+Pl2 = 9; 
 // Pl12: Total length.  +1 for margin of error.
 Pl12 = Pl1 + Pl2 + 1;
 Pw2 = Pw1 / 2;
@@ -55,6 +55,11 @@ module platform () {
             polyRound(radii, 30)
         );
     }
+    
+    // bump.
+    // subtract the 1 margin of error in Pl12
+    translate([25.5, Pw2, Ph])
+    cylinder(h = 0, r = 2.5, h = 1.5);
         
 
 }
@@ -77,10 +82,11 @@ module hook() {
     }
 }
 
-difference() {
-    hook();
-    translate([0, (Hw - Pw1) / 2], 0)
-    platform();
-}
+platform();
+//difference() {
+//    hook();
+//    translate([0, (Hw - Pw1) / 2], 0)
+//    platform();
+//}
 
 
