@@ -41,7 +41,20 @@ module hookBase() {
 }
 
 module hook() {
+    w = 19;
+    l = 25;
     
+    radii = [
+        [0, 0, 0],
+        [0, w, 0],
+        [l, w, 2],
+        [l, 0, 2]
+    ];
+
+    
+    polygon(
+        polyRound(radii, 30)
+    ); 
 }
 
 
@@ -141,11 +154,11 @@ module cylinderPlatformSubtractor() {
 }
 
    //cylinderPlatformSubtractor();
-
-difference() {
-   hookBase();
-   cylinderPlatformSubtractor();
-}
+hook();
+//difference() {
+//   hookBase();
+//   cylinderPlatformSubtractor();
+//}
 
 
 
