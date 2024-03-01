@@ -2,11 +2,32 @@
 use <../Round-Anything/polyround.scad>
 
 $fn = 100;
-cheight = 35;
-cPr1 = 22.25;
-cr2 = 21.5;
 
-//cylinder(h = cheight, Pr1 = cPr1, r2 = cr2);
+// Hook variables.
+Hw = 40;
+Hl = 45;
+Hh = 6;
+
+module hook() {
+    linear_extrude(Hh) {
+        polygon(
+            points = [
+                [0,0],
+                [0, Hw],
+                [Hl, Hw],
+                [Hl, 0]   
+            ]
+        );
+    }
+}
+
+
+// Insturment cylinder variables
+cheight = Hl;
+cr1 = 23;
+cr2 = 21;
+
+cylinder(h = cheight, r1 = cr1, r2 = cr2);
 
 
 // Platform variables
@@ -20,7 +41,7 @@ Pw2 = Pw1 / 2;
 Pr1 = 10;
 
 // height from instrument cylinder at top of platform.
-Ph = 4;
+Ph = 6;
 
 module platform () {
     
@@ -71,29 +92,33 @@ module platform () {
 
 }
 
-// Hook variables.
-Hw = 40;
-Hl = 45;
-Hh = 6;
+// Position the platform on the instrument cylinder
+verticalSpace = (Hl - Pl12) / 2;
+translate([cr2 - (Ph / 2), -Pw2, Pl12 + verticalSpace])
+rotate([0, 90, 0])
+platform();
 
-module hook() {
-    linear_extrude(Hh) {
-        polygon(
-            points = [
-                [0,0],
-                [0, Hw],
-                [Hl, Hw],
-                [Hl, 0]   
-            ]
-        );
-    }
-}
+// Measurement
+// 0.5 mm margin of error
+ml = 3;
+%translate([cr2, 0, Pl12 + verticalSpace ])
+polygon(
+    points = [
+        [0, -0.5],
+        [0, 0.5],
+        [ml, 0.5],
+        [ml, -0.5]
+    ]
+);
 
-//platform();
-difference() {
-    hook();
-    translate([0, (Hw - Pw1) / 2], 0)
-    platform();
-}
+
+//difference() {
+//    hook();
+//    translate([(Hl - Pl12) / 2, (Hw - Pw1) / 2], 0)
+//    platform();
+//}
+
+// Add platform to insturment cylindar and then subtract that.
+// need to cover top of screw hole.
 
 
