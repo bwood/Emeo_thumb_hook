@@ -26,7 +26,7 @@ module hookBaseSubtractor() {
 }
 }
 
-module hook() {
+module hookBase() {
 
     baseH = (Ph / 2) + 3;
     
@@ -38,6 +38,10 @@ module hook() {
         rotate([0, 0, 90])
         hookBaseSubtractor(); 
     }
+}
+
+module hook() {
+    
 }
 
 
@@ -139,7 +143,7 @@ module cylinderPlatformSubtractor() {
    //cylinderPlatformSubtractor();
 
 difference() {
-   hook();
+   hookBase();
    cylinderPlatformSubtractor();
 }
 
