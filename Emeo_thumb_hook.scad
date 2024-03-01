@@ -8,23 +8,35 @@ Hw = 40;
 Hl = 45;
 Hh = 6;
 
-module hook() {
-//    linear_extrude(Hh) {
-//        polygon(
-//            points = [
-//                [0,0],
-//                [0, Hw],
-//                [Hl, Hw],
-//                [Hl, 0]   
-//            ]
-//        );
-//    }
+module hookBaseSubtractor() {
+    xy = 40;
+    narrow = 15;
     
-    baseH = Ph + 2;
+    linear_extrude(cheight) {
+    difference() {
+        square(80, center = true);
+        polygon(
+            points = [
+                [0,0],
+                [-xy + narrow , -xy],
+                [xy - narrow, -xy]
+            ] 
+        );
+    }
+}
+}
+
+module hook() {
+
+    baseH = Ph + 0;
     
     difference() {
-        cylinder(h = cheight, r1 = cr1 + baseH, r2 = cr2 + baseH); 
-        instrument_cylinder();
+        difference() {
+            cylinder(h = cheight, r1 = cr1 + baseH, r2 = cr2 + baseH); 
+            instrumentCylinder();
+        }
+        rotate([0, 0, 90])
+        hookBaseSubtractor(); 
     }
 }
 
@@ -34,7 +46,7 @@ cheight = Hl;
 cr1 = 23;
 cr2 = 21;
 
-module instrument_cylinder () {
+module instrumentCylinder () {
     cylinder(h = cheight, r1 = cr1, r2 = cr2);
 }
 
@@ -94,21 +106,26 @@ module platform () {
     // screw hole
     shr = 3.5;
     translate([13.5 + shr, Pw2, Ph])
-    cylinder(h = Hh, r = shr);
+    cylinder(h = Hh + 1, r = shr);
     
         
 
 }
 
-hook();
+module cylinderPlatformSubtractor() {
+    instrumentCylinder();
+    // Position the platform on the instrument cylinder
+    verticalSpace = (Hl - Pl12) / 2;
+    translate([cr2 - (Ph / 2), -Pw2, Pl12 + verticalSpace])
+    rotate([0, 90, 0])
+    platform();
+}
 
-//instrument_cylinder();
-//// Position the platform on the instrument cylinder
-//verticalSpace = (Hl - Pl12) / 2;
-//translate([cr2 - (Ph / 2), -Pw2, Pl12 + verticalSpace])
-//rotate([0, 90, 0])
-//platform();
-//
+difference() {
+   hook();
+   cylinderPlatformSubtractor();
+}
+
 //// Measurement
 //// 0.5 mm margin of error
 //ml = 3;
@@ -122,9 +139,5 @@ hook();
 //    ]
 //);
 
-
-
-
-// need to cover top of screw hole.
 
 
