@@ -58,8 +58,15 @@ module platform () {
     
     // bump.
     // subtract the 1 margin of error in Pl12
-    translate([25.5, Pw2, Ph])
-    cylinder(h = 0, r = 2.5, h = 1.5);
+    br = 2.5;
+    translate([25.5 + br, Pw2, Ph])
+    cylinder(h = 1.5, r = br);
+    
+    // screw hole
+    shr = 3.5;
+    translate([13.5 + shr, Pw2, Ph])
+    cylinder(h = Hh, r = shr);
+    
         
 
 }
@@ -82,11 +89,11 @@ module hook() {
     }
 }
 
-platform();
-//difference() {
-//    hook();
-//    translate([0, (Hw - Pw1) / 2], 0)
-//    platform();
-//}
+//platform();
+difference() {
+    hook();
+    translate([0, (Hw - Pw1) / 2], 0)
+    platform();
+}
 
 
