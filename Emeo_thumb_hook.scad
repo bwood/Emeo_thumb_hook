@@ -9,15 +9,22 @@ Hl = 45;
 Hh = 6;
 
 module hook() {
-    linear_extrude(Hh) {
-        polygon(
-            points = [
-                [0,0],
-                [0, Hw],
-                [Hl, Hw],
-                [Hl, 0]   
-            ]
-        );
+//    linear_extrude(Hh) {
+//        polygon(
+//            points = [
+//                [0,0],
+//                [0, Hw],
+//                [Hl, Hw],
+//                [Hl, 0]   
+//            ]
+//        );
+//    }
+    
+    baseH = Ph + 2;
+    
+    difference() {
+        cylinder(h = cheight, r1 = cr1 + baseH, r2 = cr2 + baseH); 
+        instrument_cylinder();
     }
 }
 
@@ -27,8 +34,9 @@ cheight = Hl;
 cr1 = 23;
 cr2 = 21;
 
-cylinder(h = cheight, r1 = cr1, r2 = cr2);
-
+module instrument_cylinder () {
+    cylinder(h = cheight, r1 = cr1, r2 = cr2);
+}
 
 // Platform variables
 Pw1 = 19;
@@ -92,33 +100,31 @@ module platform () {
 
 }
 
-// Position the platform on the instrument cylinder
-verticalSpace = (Hl - Pl12) / 2;
-translate([cr2 - (Ph / 2), -Pw2, Pl12 + verticalSpace])
-rotate([0, 90, 0])
-platform();
+hook();
 
-// Measurement
-// 0.5 mm margin of error
-ml = 3;
-%translate([cr2, 0, Pl12 + verticalSpace ])
-polygon(
-    points = [
-        [0, -0.5],
-        [0, 0.5],
-        [ml, 0.5],
-        [ml, -0.5]
-    ]
-);
+//instrument_cylinder();
+//// Position the platform on the instrument cylinder
+//verticalSpace = (Hl - Pl12) / 2;
+//translate([cr2 - (Ph / 2), -Pw2, Pl12 + verticalSpace])
+//rotate([0, 90, 0])
+//platform();
+//
+//// Measurement
+//// 0.5 mm margin of error
+//ml = 3;
+//%translate([cr2, 0, Pl12 + verticalSpace ])
+//polygon(
+//    points = [
+//        [0, -0.5],
+//        [0, 0.5],
+//        [ml, 0.5],
+//        [ml, -0.5]
+//    ]
+//);
 
 
-//difference() {
-//    hook();
-//    translate([(Hl - Pl12) / 2, (Hw - Pw1) / 2], 0)
-//    platform();
-//}
 
-// Add platform to insturment cylindar and then subtract that.
+
 // need to cover top of screw hole.
 
 
