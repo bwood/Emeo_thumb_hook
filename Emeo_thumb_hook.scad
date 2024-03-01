@@ -28,7 +28,7 @@ module hookBaseSubtractor() {
 
 module hook() {
 
-    baseH = Ph + 0;
+    baseH = (Ph / 2) + 3;
     
     difference() {
         difference() {
@@ -106,9 +106,11 @@ module platform () {
     // screw hole
     shr = 3.5;
     translate([13.5 + shr, Pw2, Ph])
-    cylinder(h = Hh + 1, r = shr);
-    
-        
+    cylinder(h = Hh + 1, r = shr);  
+  
+    screwHeadR = 13 / 2;
+    translate([13.5 + shr, Pw2, Ph + 2])
+    cylinder(h = Hh, r = screwHeadR);  
 
 }
 
@@ -119,25 +121,29 @@ module cylinderPlatformSubtractor() {
     translate([cr2 - (Ph / 2), -Pw2, Pl12 + verticalSpace])
     rotate([0, 90, 0])
     platform();
+    
+    // Measurement
+    // 0.5 mm margin of error
+    ml = Ph / 2;
+    %translate([cr2, 0, Pl12 + verticalSpace ])
+    polygon(
+        points = [
+            [0, -0.5],
+            [0, 0.5],
+            [ml, 0.5],
+            [ml, -0.5]
+        ]
+    );
 }
+
+   //cylinderPlatformSubtractor();
 
 difference() {
    hook();
    cylinderPlatformSubtractor();
 }
 
-//// Measurement
-//// 0.5 mm margin of error
-//ml = 3;
-//%translate([cr2, 0, Pl12 + verticalSpace ])
-//polygon(
-//    points = [
-//        [0, -0.5],
-//        [0, 0.5],
-//        [ml, 0.5],
-//        [ml, -0.5]
-//    ]
-//);
+
 
 
 
