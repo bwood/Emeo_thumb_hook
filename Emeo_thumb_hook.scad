@@ -43,6 +43,7 @@ module hookBase() {
 module hook() {
     w = 19;
     l = 25;
+    h = 3;
     
     radii = [
         [0, 0, 0],
@@ -51,10 +52,12 @@ module hook() {
         [l, 0, 2]
     ];
 
-    
-    polygon(
-        polyRound(radii, 30)
-    ); 
+   rotate([0, -90, 0])
+   linear_extrude(height = h) {    
+        polygon(
+            polyRound(radii, 30)
+        ); 
+    }
 }
 
 
