@@ -53,14 +53,11 @@ module hook() {
         [w - h, l, r]
     ];
 
-   rotate_extrude(angle = 180) {
-//   rotate([0, -90, 0])
-//   linear_extrude(height = h) {    
+    rotate_extrude(angle = 180) {
         polygon(
             polyRound(radii, 30)
         ); 
-//    }
-}
+    }
 }
 
 
