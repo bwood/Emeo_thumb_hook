@@ -44,20 +44,23 @@ module hook() {
     w = 19;
     l = 25;
     h = 3;
+    r = 2;
     
     radii = [
-        [0, 0, 0],
-        [0, w, 0],
-        [l, w, 2],
-        [l, 0, 2]
+        [w - h, 0, r],
+        [w, 0, r],
+        [w, l, r],
+        [w - h, l, r]
     ];
 
-   rotate([0, -90, 0])
-   linear_extrude(height = h) {    
+   rotate_extrude(angle = 180) {
+//   rotate([0, -90, 0])
+//   linear_extrude(height = h) {    
         polygon(
             polyRound(radii, 30)
         ); 
-    }
+//    }
+}
 }
 
 
