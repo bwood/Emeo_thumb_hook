@@ -41,19 +41,20 @@ module hookBase() {
 }
 
 module hook() {
-    w = 19;
-    l = 25;
+    w = 8;
+    l = 19;
     h = 3;
     r = 2;
+    tilt = 1;
     
     radii = [
         [w - h, 0, r],
         [w, 0, r],
-        [w, l, r],
-        [w - h, l, r]
+        [w + tilt, l, r],
+        [w - h + tilt, l, r]
     ];
 
-    rotate_extrude(angle = 180) {
+    rotate_extrude(angle = 160) {
         polygon(
             polyRound(radii, 30)
         ); 
