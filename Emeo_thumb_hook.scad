@@ -45,7 +45,7 @@ module hook() {
     l = 19;
     h = 3;
     r = 0.5;
-    tilt = 1.5;
+    tilt = 0; // 1.5;
     
     //main hook
     radii = [
@@ -62,25 +62,31 @@ module hook() {
     }
     
     //hook tip
-    tipRadius = 100;
+    tr = l / 2;
     tipRadii = [
-        [0, 0, 0],
-        [0 + h, l / 2, tipRadius],
-        [0, l, 0]
+        [0, 0, tr],
+        [0, l, tr],
+        [l, l, tr],
+        [l, 0, tr],        
     ];
     
-//    polygon([
-//        [0, 0],
-//        [0 + h, l / 2],
-//        [0, l]
-//    ]);
-  
-  rotate([0, 0, 160])
-  translate([w, 0, 0])  
-  color("LimeGreen")
-  rotate([86, 0, 90])
-  polyRoundExtrude(tipRadii,h,r,r,fn=20);
-
+    rotate([0, 0, 160])
+    translate([w, 0, 0])
+    rotate([90, 0, 90])
+    translate([-w, 0, 0])
+    color("LimeGreen")
+    difference() {
+        polyRoundExtrude(tipRadii, h, r, r, fn=20);
+        translate([-(l / 2), 0, 0])
+        linear_extrude(h) {
+            polygon([
+                [0, 0],
+                [0, l],
+                [l, l],
+                [l, 0]
+            ]);   
+        }
+    }
 
 }
 
