@@ -41,17 +41,18 @@ module hookBase() {
 }
 
 module hook() {
-    w = 8;
+    w = 9.5;
     l = 19;
     h = 3;
-    r = 2;
-    tilt = 1;
+    r = 0.5;
+    tilt = 1.5;
     
+    //main hook
     radii = [
-        [w - h, 0, r],
         [w, 0, r],
-        [w + tilt, l, r],
-        [w - h + tilt, l, r]
+        [w + h, 0, r],
+        [w + h - tilt, l, r],
+        [w - tilt, l, r]
     ];
 
     rotate_extrude(angle = 160) {
@@ -59,6 +60,28 @@ module hook() {
             polyRound(radii, 30)
         ); 
     }
+    
+    //hook tip
+    tipRadius = 100;
+    tipRadii = [
+        [0, 0, 0],
+        [0 + h, l / 2, tipRadius],
+        [0, l, 0]
+    ];
+    
+//    polygon([
+//        [0, 0],
+//        [0 + h, l / 2],
+//        [0, l]
+//    ]);
+  
+  rotate([0, 0, 160])
+  translate([w, 0, 0])  
+  color("LimeGreen")
+  rotate([86, 0, 90])
+  polyRoundExtrude(tipRadii,h,r,r,fn=20);
+
+
 }
 
 
