@@ -45,7 +45,8 @@ module hook() {
     l = 19;
     h = 3;
     r = 0.5;
-    tilt = 0; // 1.5;
+    tilt = 0; // 1.5 (Mark VI hook) Adds too much complexity.
+    hrot = 140;
     
     //main hook
     radii = [
@@ -55,7 +56,7 @@ module hook() {
         [w - tilt, l, r]
     ];
 
-    rotate_extrude(angle = 160) {
+    rotate_extrude(angle = hrot) {
         polygon(
             polyRound(radii, 30)
         ); 
@@ -70,11 +71,13 @@ module hook() {
         [l, 0, tr],        
     ];
     
-    rotate([0, 0, 160])
+    
+    rotate([0, 0, hrot])
     translate([w, 0, 0])
     rotate([90, 0, 90])
     translate([-w, 0, 0])
     color("LimeGreen")
+    // cut the disc in half.
     difference() {
         polyRoundExtrude(tipRadii, h, r, r, fn=20);
         translate([-(l / 2), 0, 0])
