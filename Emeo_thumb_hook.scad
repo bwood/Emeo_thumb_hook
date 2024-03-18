@@ -8,7 +8,20 @@ Hw = 40;
 Hl = 45;
 Hh = 6;
 
+// Insturment cylinder variables
+cheight = Hl;
+cr1 = 23;
+cr2 = 21;
+// Cylinder representing instrument body around thumbhook.
+module instrumentCylinder () {
+    cylinder(h = cheight, r1 = cr1, r2 = cr2);
+}
+
+
+// Rectangle with wedge cut out, to be subtracted from hookBase.
 module hookBaseSubtractor() {
+    
+//  Piece of a hollow cylinder that will serve as base for our thumbhook.
     xy = 40;
     narrow = 15;
     
@@ -40,6 +53,7 @@ module hookBase() {
     }
 }
 
+// The thumbhook to be placed on the hookBase.
 module hook() {
     w = 9.5;
     l = 19;
@@ -130,14 +144,7 @@ module hook() {
 }
 
 
-// Insturment cylinder variables
-cheight = Hl;
-cr1 = 23;
-cr2 = 21;
 
-module instrumentCylinder () {
-    cylinder(h = cheight, r1 = cr1, r2 = cr2);
-}
 
 // Platform variables
 Pw1 = 19;
@@ -152,7 +159,10 @@ Pr1 = 10;
 // height from instrument cylinder at top of platform.
 Ph = 6;
 
+// The shield-shaped platform to which the standard Emeo thumbhook attachs.
 module platform () {
+
+// Cylinder + thumbhook platform, to be subtracted from hookBase.    
     
     radii = [
         // x, y, radius
@@ -225,13 +235,18 @@ module cylinderPlatformSubtractor() {
     );
 }
 
-   //cylinderPlatformSubtractor();
 
-hook();
-//difference() {
-//   hookBase();
-//   cylinderPlatformSubtractor();
-//}
+//cylinderPlatformSubtractor();
+//hookBaseSubtractor();
+//hookBase();
+
+//hook();
+
+// The base that fits over the screw hole.
+difference() {
+   hookBase();
+   cylinderPlatformSubtractor();
+}
 
 
 
