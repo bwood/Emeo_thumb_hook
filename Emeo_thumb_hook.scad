@@ -40,62 +40,20 @@ module hookBase() {
     }
 }
 
-module hookWedge() {
-    w = 9.5;
-    l = 19;
-    h = 3;
-    r = 0.5;
-    tilt = 1.5;
-
-
-    difference() {
-        // Additional material for base of hook where it attaches to the platform.    
-        radiiAddition = [
-            [0, 0, r],
-            [h, 0, r],
-            [h, l, r],
-            [0, l, r]
-        ];
-
-        translate([0, 0, h])
-        rotate([0, 90, 0])
-        linear_extrude(tilt) {
-            polygon(
-                polyRound(radiiAddition, 30)
-            ); 
-        }
-
-        // Wedge to subtract from the additional material above.
-        radii = [
-            [0, 0],
-            [tilt, 0],
-            [0, l]
-        ];    
-        
-
-        color("LimeGreen")
-        linear_extrude(h) {
-            polygon(
-                radii          
-            );
-        }
-    }
-}
-
 module hook() {
     w = 9.5;
     l = 19;
     h = 3;
     r = 0.5;
-    tilt = 0; // 1.5 (Mark VI hook) Adds too much complexity.
+    tilt = 1.5;
     hrot = 140;
     
     // main hook
     radii = [
         [w, 0, r],
         [w + h, 0, r],
-        [w + h - tilt, l, r],
-        [w - tilt, l, r]
+        [w + h, l, r],
+        [w, l, r]
     ];
 
     rotate_extrude(angle = hrot) {
@@ -133,7 +91,42 @@ module hook() {
             ]);   
         }
     }
+    
+    // Hook wedge: Additional material for base of hook where it attaches to the platform.
+    translate([w, -tilt, 0])
+    rotate([90, 0, 90])
+    difference() {
+        // Rectangular addition.    
+        radiiAddition = [
+            [0, 0, r],
+            [h, 0, r],
+            [h, l, r],
+            [0, l, r]
+        ];
 
+        translate([0, 0, h])
+        rotate([0, 90, 0])
+        linear_extrude(tilt) {
+            polygon(
+                polyRound(radiiAddition, 30)
+            ); 
+        }
+
+        // Wedge to subtract from the rectangular additional above.
+        radii = [
+            [0, 0],
+            [tilt, 0],
+            [0, l]
+        ];    
+        
+
+        color("LimeGreen")
+        linear_extrude(h) {
+            polygon(
+                radii          
+            );
+        }
+    }
 }
 
 
@@ -233,8 +226,8 @@ module cylinderPlatformSubtractor() {
 }
 
    //cylinderPlatformSubtractor();
-hookWedge();
-//hook();
+
+hook();
 //difference() {
 //   hookBase();
 //   cylinderPlatformSubtractor();
