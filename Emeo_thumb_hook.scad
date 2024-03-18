@@ -40,6 +40,26 @@ module hookBase() {
     }
 }
 
+module hookWedge() {
+    w = 9.5;
+    l = 19;
+    h = 3;
+    r = 0.5;
+    tilt = 1.5;
+
+    radii = [
+        [0, 0],
+        [tilt, 0],
+        [0, l]
+    ];
+    
+    linear_extrude(h) {
+        polygon(
+            radii          
+        );
+    }
+}
+
 module hook() {
     w = 9.5;
     l = 19;
@@ -48,7 +68,7 @@ module hook() {
     tilt = 0; // 1.5 (Mark VI hook) Adds too much complexity.
     hrot = 140;
     
-    //main hook
+    // main hook
     radii = [
         [w, 0, r],
         [w + h, 0, r],
@@ -62,7 +82,8 @@ module hook() {
         ); 
     }
     
-    //hook tip
+    // hook tip
+    // transform the square to a circle with this radius calculation.
     tr = l / 2;
     tipRadii = [
         [0, 0, tr],
@@ -190,7 +211,8 @@ module cylinderPlatformSubtractor() {
 }
 
    //cylinderPlatformSubtractor();
-hook();
+hookWedge();
+//hook();
 //difference() {
 //   hookBase();
 //   cylinderPlatformSubtractor();
