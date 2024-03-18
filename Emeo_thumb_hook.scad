@@ -47,16 +47,38 @@ module hookWedge() {
     r = 0.5;
     tilt = 1.5;
 
-    radii = [
-        [0, 0],
-        [tilt, 0],
-        [0, l]
-    ];
-    
-    linear_extrude(h) {
-        polygon(
-            radii          
-        );
+
+    difference() {
+        // Additional material for base of hook where it attaches to the platform.    
+        radiiAddition = [
+            [0, 0, r],
+            [h, 0, r],
+            [h, l, r],
+            [0, l, r]
+        ];
+
+        translate([0, 0, h])
+        rotate([0, 90, 0])
+        linear_extrude(tilt) {
+            polygon(
+                polyRound(radiiAddition, 30)
+            ); 
+        }
+
+        // Wedge to subtract from the additional material above.
+        radii = [
+            [0, 0],
+            [tilt, 0],
+            [0, l]
+        ];    
+        
+
+        color("LimeGreen")
+        linear_extrude(h) {
+            polygon(
+                radii          
+            );
+        }
     }
 }
 
