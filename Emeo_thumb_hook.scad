@@ -10,8 +10,8 @@ Hh = 6;
 
 // Insturment cylinder variables
 cheight = Hl;
-cr1 = 23;
-cr2 = 21;
+cr1 = 21;
+cr2 = 22.5;
 // Cylinder representing instrument body around thumbhook.
 module instrumentCylinder () {
     cylinder(h = cheight, r1 = cr1, r2 = cr2);
