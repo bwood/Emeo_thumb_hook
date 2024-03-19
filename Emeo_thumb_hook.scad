@@ -4,8 +4,8 @@ use <../Round-Anything/polyround.scad>
 $fn = 100;
 
 // Hook variables.
-Hw = 40;
-Hl = 45;
+Hw = 34;
+Hl = 50;
 Hh = 6;
 
 // Insturment cylinder variables
@@ -161,8 +161,6 @@ Ph = 6;
 
 // The shield-shaped platform to which the standard Emeo thumbhook attachs.
 module platform () {
-
-// Cylinder + thumbhook platform, to be subtracted from hookBase.    
     
     radii = [
         // x, y, radius
@@ -213,10 +211,12 @@ module platform () {
 
 }
 
+// Cylinder + thumbhook platform, to be subtracted from hookBase.    
 module cylinderPlatformSubtractor() {
     instrumentCylinder();
-    // Position the platform on the instrument cylinder
-    verticalSpace = (Hl - Pl12) / 2;
+    // Position the platform on the instrument cylinder.
+    // Verticle space from top of platform to keypad guard (F#).
+    verticalSpace = 10;
     translate([cr2 - (Ph / 2), -Pw2, Pl12 + verticalSpace])
     rotate([0, 90, 0])
     platform();
