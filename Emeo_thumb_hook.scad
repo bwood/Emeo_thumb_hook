@@ -4,7 +4,6 @@ use <../Round-Anything/polyround.scad>
 $fn = 100;
 
 // Hook variables.
-Hw = 34;
 Hl = 50;
 Hh = 6;
 
@@ -21,24 +20,25 @@ module instrumentCylinder () {
 // Rectangle with wedge cut out, to be subtracted from hookBase.
 module hookBaseSubtractor() {
     
-//  Piece of a hollow cylinder that will serve as base for our thumbhook.
     xy = 40;
     narrow = 15;
+    addLeft = 20;
     
     linear_extrude(cheight) {
-    difference() {
-        square(80, center = true);
-        polygon(
-            points = [
-                [0,0],
-                [-xy + narrow , -xy],
-                [xy - narrow, -xy]
-            ] 
-        );
+        difference() {
+            square(80, center = true);
+            polygon(
+                points = [
+                    [0,0],
+                    [-xy + narrow - addLeft , -xy],
+                    [xy - narrow, -xy]
+                ] 
+            );
+        }
     }
 }
-}
 
+// Piece of a hollow cylinder that will serve as base for our thumbhook.
 module hookBase() {
 
     baseH = (Ph / 2) + 3;
