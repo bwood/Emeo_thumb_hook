@@ -66,9 +66,9 @@ module hookBase() {
         [cr1, cheight, r]
     ];
     
-    rotHb = 115;
+    rotHb = 108;
     
-    rotate([0, 0, -80])
+    rotate([0, 0, -65])
     rotate_extrude(angle = rotHb) {
         polygon(
             polyRound(radiiHb, 30) //todo 30 to variable.
