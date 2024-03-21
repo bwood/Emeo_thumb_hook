@@ -7,13 +7,16 @@ $fn = 100;
 Hl = 50;
 Hh = 6;
 
+// radius for polyRound functions
+r = 0.5;
+
 // Insturment cylinder variables
 cheight = Hl;
 cr1 = 21;
 cr2 = 22.5;
 // Cylinder representing instrument body around thumbhook.
 module instrumentCylinder () {
-    cylinder(h = cheight, r1 = cr1, r2 = cr2);
+    cylinder(h = cheight, r1 = cr2, r2 = cr1);
 }
 
 
@@ -38,10 +41,12 @@ module hookBaseSubtractor() {
     }
 }
 
+// Hook Base variables.
+// height from instrument cylinder at top of platform.
+Ph = 6;
+baseH = (Ph / 2) + 4;
 // Piece of a hollow cylinder that will serve as base for our thumbhook.
-module hookBase() {
-
-    baseH = (Ph / 2) + 3;
+module hookBase0() {
     
     difference() {
         difference() {
@@ -53,12 +58,29 @@ module hookBase() {
     }
 }
 
+module hookBase() {
+    radiiHb = [
+        [cr2, 0, r],
+        [cr2 + baseH, 0, r],
+        [cr1 + baseH, cheight, r],
+        [cr1, cheight, r]
+    ];
+    
+    rotHb = 115;
+    
+    rotate([0, 0, -80])
+    rotate_extrude(angle = rotHb) {
+        polygon(
+            polyRound(radiiHb, 30) //todo 30 to variable.
+        );
+    }
+}
+
 // The thumbhook to be placed on the hookBase.
 module hook() {
     w = 9.5;
     l = 19;
     h = 3;
-    r = 0.5;
     tilt = 1.5;
     hrot = 140;
     
@@ -156,8 +178,7 @@ Pw2 = Pw1 / 2;
 // polyround radius
 Pr1 = 10;
 
-// height from instrument cylinder at top of platform.
-Ph = 6;
+
 
 // The shield-shaped platform to which the standard Emeo thumbhook attachs.
 module platform () {
@@ -247,7 +268,7 @@ difference() {
    hookBase();
    cylinderPlatformSubtractor();
 }
-
+//
 
 
 
