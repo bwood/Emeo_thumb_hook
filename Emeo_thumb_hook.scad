@@ -45,15 +45,16 @@ module hookBaseSubtractor() {
 // height from instrument cylinder at top of platform.
 Ph = 6;
 baseH = (Ph / 2) + 4;
+
+radiiHb = [
+    [cr2, 0, r],
+    [cr2 + baseH, 0, r],
+    [cr1 + baseH, cheight, r],
+    [cr1, cheight, r]
+];
 // Piece of a hollow cylinder that will serve as base for our thumbhook.
 module hookBase() {
-    radiiHb = [
-        [cr2, 0, r],
-        [cr2 + baseH, 0, r],
-        [cr1 + baseH, cheight, r],
-        [cr1, cheight, r]
-    ];
-    
+    // Got 108 using the law of cosines to calculate the angle that would result in a measurement of 37mm for the 3rd side of the isosceles triangle. See notes in 3d.org.
     rotHb = 108;
     
     rotate([0, 0, -65])
@@ -165,8 +166,6 @@ Pl12 = Pl1 + Pl2 + 1;
 Pw2 = Pw1 / 2;
 // polyround radius
 Pr1 = 10;
-
-
 
 // The shield-shaped platform to which the standard Emeo thumbhook attachs.
 module platform () {
