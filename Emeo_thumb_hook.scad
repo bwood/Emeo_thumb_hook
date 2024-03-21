@@ -52,6 +52,7 @@ radiiHb = [
     [cr1 + baseH, cheight, r],
     [cr1, cheight, r]
 ];
+
 // Piece of a hollow cylinder that will serve as base for our thumbhook.
 module hookBase() {
     // Got 108 using the law of cosines to calculate the angle that would result in a measurement of 37mm for the 3rd side of the isosceles triangle. See notes in 3d.org.
@@ -63,7 +64,27 @@ module hookBase() {
             polyRound(radiiHb, 30) //todo 30 to variable.
         );
     }
+    
+    // Right side.
+    rotate([90, 0, 45])
+    hookBaseSide();
+    
+    // Left side.
+
 }
+//    rotate([0, 0, -68])
+//    translate([cr2 + (baseH / 2), 0, 0])
+    translate([cr2 + (baseH / 2), 0, cheight / 2])
+    rotate([-90, 0, 0])
+    translate([-cr2 - (baseH / 2), -cheight / 2, 0])
+    hookBaseSide();
+
+//todo need parameter to change the rounded side.
+module hookBaseSide() {
+    polyRoundExtrude(radiiHb, 1, 0, r, fn=20);
+}
+
+
 
 // The thumbhook to be placed on the hookBase.
 module hook() {
@@ -255,7 +276,7 @@ difference() {
    hookBase();
    cylinderPlatformSubtractor();
 }
-//
+
 
 
 
