@@ -46,18 +46,6 @@ module hookBaseSubtractor() {
 Ph = 6;
 baseH = (Ph / 2) + 4;
 // Piece of a hollow cylinder that will serve as base for our thumbhook.
-module hookBase0() {
-    
-    difference() {
-        difference() {
-            cylinder(h = cheight, r1 = cr1 + baseH, r2 = cr2 + baseH); 
-            instrumentCylinder();
-        }
-        rotate([0, 0, 90])
-        hookBaseSubtractor(); 
-    }
-}
-
 module hookBase() {
     radiiHb = [
         [cr2, 0, r],
