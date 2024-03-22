@@ -181,7 +181,8 @@ module hook() {
 
 
 // Platform variables
-Pw1 = 19;
+// +1 for margin of error.
+Pw1 = 19 + 1;
 Pl1 = 26;
 Pl2 = 9; 
 // Pl12: Total length.  +1 for margin of error.
