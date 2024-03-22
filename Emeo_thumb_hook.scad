@@ -70,18 +70,20 @@ module hookBase() {
     hookBaseSide();
     
     // Left side.
+    rotate([90, 0, -65])
+    hookBaseSide(true);
 
 }
-//    rotate([0, 0, -68])
-//    translate([cr2 + (baseH / 2), 0, 0])
-    translate([cr2 + (baseH / 2), 0, cheight / 2])
-    rotate([-90, 0, 0])
-    translate([-cr2 - (baseH / 2), -cheight / 2, 0])
-    hookBaseSide();
+
 
 //todo need parameter to change the rounded side.
-module hookBaseSide() {
-    polyRoundExtrude(radiiHb, 1, 0, r, fn=20);
+module hookBaseSide(roundTop = false) {
+    if (roundTop) {
+        polyRoundExtrude(radiiHb, 1, r, 0, fn=20);        
+    }
+    else {
+        polyRoundExtrude(radiiHb, 1, 0, r, fn=20);
+    }
 }
 
 
