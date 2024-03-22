@@ -89,18 +89,18 @@ module hookBaseSide(roundTop = false) {
 
 
 // The thumbhook to be placed on the hookBase.
+thH = 3;
 module hook() {
     w = 9.5;
     l = 19;
-    h = 3;
     tilt = 1.5;
     hrot = 140;
     
     // main hook
     radii = [
         [w, 0, r],
-        [w + h, 0, r],
-        [w + h, l, r],
+        [w + thH, 0, r],
+        [w + thH, l, r],
         [w, l, r]
     ];
 
@@ -128,9 +128,9 @@ module hook() {
     color("LimeGreen")
     // cut the disc in half.
     difference() {
-        polyRoundExtrude(tipRadii, h, r, r, fn=20);
+        polyRoundExtrude(tipRadii, thH, r, r, fn=20);
         translate([-(l / 2), 0, 0])
-        linear_extrude(h) {
+        linear_extrude(thH) {
             polygon([
                 [0, 0],
                 [0, l],
@@ -147,12 +147,12 @@ module hook() {
         // Rectangular addition.    
         radiiAddition = [
             [0, 0, r],
-            [h, 0, r],
-            [h, l, r],
+            [thH, 0, r],
+            [thH, l, r],
             [0, l, r]
         ];
 
-        translate([0, 0, h])
+        translate([0, 0, thH])
         rotate([0, 90, 0])
         linear_extrude(tilt) {
             polygon(
@@ -161,19 +161,19 @@ module hook() {
         }
 
         // Wedge to subtract from the rectangular additional above.
-        radii = [
-            [0, 0],
-            [tilt, 0],
-            [0, l]
-        ];    
+//        radii = [
+//            [0, 0],
+//            [tilt, 0],
+//            [0, l]
+//        ];    
         
 
-        color("LimeGreen")
-        linear_extrude(h) {
-            polygon(
-                radii          
-            );
-        }
+//        color("LimeGreen")
+//        linear_extrude(thH) {
+//            polygon(
+//                radii          
+//            );
+//        }
     }
 }
 
@@ -266,7 +266,7 @@ module cylinderPlatformSubtractor() {
 //hookBaseSubtractor();
 //hookBase();
 
-//hook();
+
 
 // The base that fits over the screw hole.
 difference() {
@@ -274,6 +274,10 @@ difference() {
    cylinderPlatformSubtractor();
 }
 
+rotate([0, 0, -50])
+translate([10 + thH + cr1 + 1, 0, cheight])
+rotate([90, 0, 180 + 15])
+hook();
 
 
 
