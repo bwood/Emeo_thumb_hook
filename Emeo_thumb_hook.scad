@@ -226,22 +226,29 @@ module platform () {
         );
     }
     
-    // bump.
-    // subtract the 1 margin of error in Pl12
-    br = 2.5;
-    translate([25.5 + br, Pw2, Ph])
-    cylinder(h = 1.5, r = br);
+    // bump
+    // bump radius + 0 margin of error
+    br = 2.5 + 0.5;
+    bumpH = 1 + 0.5; 
+    bumpDistFromEnd = 3.5;
+    // subtract the half the margin of error in Pl12 (0.5)
+    translate([Pl12 - 0.5 - bumpDistFromEnd - br, Pw2, Ph])
+    cylinder(h = bumpH, r = br);
     
     // screw hole
+    // radius: measure the raised area surrounding the hole on the plaform.
     shr = 3.5;
-    translate([13.5 + shr, Pw2, Ph])
+    shDistFromTop = 14.5;
+    translate([shDistFromTop + shr + 0.5, Pw2, Ph])
     cylinder(h = Hh + 1, r = shr);  
   
-    screwHeadR = 13 / 2;
-    translate([13.5 + shr, Pw2, Ph + 2])
-    cylinder(h = Hh, r = screwHeadR);  
+    sHeadR = 13 / 2;
+    sHeadHeightOffPlatform = 1.5;
+    translate([shDistFromTop + shr + 0.5, Pw2, Ph + sHeadHeightOffPlatform])
+    cylinder(h = Hh, r = sHeadR);  
 
 }
+
 
 // Cylinder + thumbhook platform, to be subtracted from hookBase.    
 module cylinderPlatformSubtractor() {
