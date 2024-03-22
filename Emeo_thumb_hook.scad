@@ -44,7 +44,7 @@ module hookBaseSubtractor() {
 // Hook Base variables.
 // height from instrument cylinder at top of platform.
 Ph = 5;
-baseH = (Ph / 2) + 4;
+baseH = (Ph / 2) + 2.5;
 
 radiiHb = [
     [cr2, 0, r],
@@ -275,17 +275,17 @@ module cylinderPlatformSubtractor() {
 }
 
 
-cylinderPlatformSubtractor();
+//cylinderPlatformSubtractor();
 //hookBaseSubtractor();
 //hookBase();
 
 //hook();
 
 // The base that fits over the screw hole.
-//difference() {
-//   hookBase();
-//   cylinderPlatformSubtractor();
-//}
+difference() {
+   hookBase();
+   cylinderPlatformSubtractor();
+}
 
 
 
