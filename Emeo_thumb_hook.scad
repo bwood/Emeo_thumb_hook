@@ -4,7 +4,7 @@ use <../Round-Anything/polyround.scad>
 $fn = 100;
 
 // Hook variables.
-Hl = 50;
+Hl = 48;
 Hh = 6;
 
 // radius for polyRound functions
@@ -43,7 +43,7 @@ module hookBaseSubtractor() {
 
 // Hook Base variables.
 // height from instrument cylinder at top of platform.
-Ph = 6;
+Ph = 5;
 baseH = (Ph / 2) + 4;
 
 radiiHb = [
@@ -248,14 +248,14 @@ module cylinderPlatformSubtractor() {
     // Position the platform on the instrument cylinder.
     // Verticle space from top of platform to keypad guard (F#).
     verticalSpace = 10;
-    translate([cr2 - (Ph / 2), -Pw2, Pl12 + verticalSpace])
+    translate([cr1 - (Ph / 2), -Pw2, cheight - verticalSpace])
     rotate([0, 90, 0])
     platform();
     
     // Measurement
     // 0.5 mm margin of error
     ml = Ph / 2;
-    %translate([cr2, 0, Pl12 + verticalSpace ])
+    %translate([cr1, 0, cheight - verticalSpace ])
     polygon(
         points = [
             [0, -0.5],
@@ -267,17 +267,17 @@ module cylinderPlatformSubtractor() {
 }
 
 
-//cylinderPlatformSubtractor();
+cylinderPlatformSubtractor();
 //hookBaseSubtractor();
 //hookBase();
 
 //hook();
 
 // The base that fits over the screw hole.
-difference() {
-   hookBase();
-   cylinderPlatformSubtractor();
-}
+//difference() {
+//   hookBase();
+//   cylinderPlatformSubtractor();
+//}
 
 
 
