@@ -207,17 +207,17 @@ module platform () {
         [0, 0, 0]
     ];
 
-    // Measurement.
-    %translate([0,0,-1]) {
-        polygon(
-            points = [
-                [0, (Pw1 / 2) - 1], 
-                [0, (Pw1 / 2) + 1],
-                [Pl1 + Pl2, (Pw1 / 2) + 1],
-                [Pl1 + Pl2, (Pw1 / 2) - 1] 
-            ]       
-            );
-    }
+    // Measurement: Height of platform off cylinder.
+    //    %translate([0,0,-1]) {
+    //        polygon(
+    //            points = [
+    //                [0, (Pw1 / 2) - 1], 
+    //                [0, (Pw1 / 2) + 1],
+    //                [Pl1 + Pl2, (Pw1 / 2) + 1],
+    //                [Pl1 + Pl2, (Pw1 / 2) - 1] 
+    //            ]       
+    //            );
+    //    }
     
 
     linear_extrude(Ph) {
@@ -259,19 +259,6 @@ module cylinderPlatformSubtractor() {
     translate([cr1 - (Ph / 2), -Pw2, cheight - verticalSpace])
     rotate([0, 90, 0])
     platform();
-    
-    // Measurement
-    // 0.5 mm margin of error
-    ml = Ph / 2;
-    %translate([cr1, 0, cheight - verticalSpace ])
-    polygon(
-        points = [
-            [0, -0.5],
-            [0, 0.5],
-            [ml, 0.5],
-            [ml, -0.5]
-        ]
-    );
 }
 
 
