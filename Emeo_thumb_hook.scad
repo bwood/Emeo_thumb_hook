@@ -227,7 +227,7 @@ module platform () {
     }
     
     // bump
-    // bump radius + 0 margin of error
+    // bump radius + 0.5 margin of error
     br = 2.5 + 0.5;
     bumpH = 1 + 0.5; 
     bumpDistFromEnd = 3.5;
