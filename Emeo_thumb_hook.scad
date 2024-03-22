@@ -262,22 +262,24 @@ module cylinderPlatformSubtractor() {
 }
 
 
-//cylinderPlatformSubtractor();
-//hookBaseSubtractor();
-//hookBase();
+module hookBaseWithHook () {
+    hookBase();
+    
+    // Place thumbhook.
+    rotate([0, 0, -50])
+    translate([10 + thH + cr1 + 1, 0, cheight - 10])
+    rotate([87, 0, 180 + 16])
+    hook();
+}
 
 
 
 // The base that fits over the screw hole.
 difference() {
-   hookBase();
+   hookBaseWithHook();
    cylinderPlatformSubtractor();
 }
 
-rotate([0, 0, -50])
-translate([10 + thH + cr1 + 1, 0, cheight])
-rotate([90, 0, 180 + 15])
-hook();
 
 
 
