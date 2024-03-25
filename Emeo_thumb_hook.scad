@@ -8,7 +8,7 @@ Hl = 48;
 Hh = 6;
 
 // radius for polyRound functions
-r = 0.5;
+r = 1;
 
 // Insturment cylinder variables
 cheight = Hl;
@@ -55,10 +55,10 @@ radiiHb = [
 
 // Piece of a hollow cylinder that will serve as base for our thumbhook.
 module hookBase() {
-    // Got 108 using the law of cosines to calculate the angle that would result in a measurement of 37mm for the 3rd side of the isosceles triangle. See notes in 3d.org.
-    rotHb = 108;
+    // Got 108 using the law of cosines to calculate the angle that would result in a measurement of 37mm for the 3rd side of the isosceles triangle. See notes in 3d.org. Angle of 108 deb results in 37mm. Using the screw hole for orientation, I've reduced that angle a bit while tweeking the position of the thumbhook.
+    rotHb = 90;
     
-    rotate([0, 0, -65])
+    rotate([0, 0, -48])
     rotate_extrude(angle = rotHb) {
         polygon(
             polyRound(radiiHb, 30) //todo 30 to variable.
@@ -66,11 +66,11 @@ module hookBase() {
     }
     
     // Right side.
-    rotate([90, 0, 45])
+    rotate([90, 0, 44])
     hookBaseSide();
     
     // Left side.
-    rotate([90, 0, -65])
+    rotate([90, 0, -48])
     hookBaseSide(true);
 
 }
@@ -266,8 +266,8 @@ module hookBaseWithHook () {
     hookBase();
     
     // Place thumbhook.
-    rotate([0, 0, -50])
-    translate([10 + thH + cr1 + 1, 0, cheight - 10])
+    rotate([0, 0, -40])
+    translate([10 + thH + cr1 + 1, 0, cheight - 12])
     rotate([87, 0, 180 + 16])
     hook();
 }
