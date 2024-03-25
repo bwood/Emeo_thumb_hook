@@ -1,7 +1,10 @@
 // https://github.com/Irev-Dev/Round-Anything
 use <../Round-Anything/polyround.scad>
 
-$fn = 100;
+//$fn = 20;
+fnPolyRound = 4; //20;
+// Epsilon. This small value guarantees overlap and solves the warning: "Object may not be a valid 2-manifold and may need repair!"
+eps = 0.01;
 
 // Hook variables.
 Hl = 48;
@@ -70,7 +73,7 @@ module hookBase() {
     hookBaseSide();
     
     // Left side.
-    rotate([90, 0, -48])
+    rotate([90, 0, -48 - eps])
     hookBaseSide(true);
 
 }
@@ -79,10 +82,10 @@ module hookBase() {
 //todo need parameter to change the rounded side.
 module hookBaseSide(roundTop = false) {
     if (roundTop) {
-        polyRoundExtrude(radiiHb, 1, r, 0, fn=20);        
+        polyRoundExtrude(radiiHb, 1, r, 0, fn=fnPolyRound);        
     }
     else {
-        polyRoundExtrude(radiiHb, 1, 0, r, fn=20);
+        polyRoundExtrude(radiiHb, 1, 0, r, fn=fnPolyRound);
     }
 }
 
@@ -128,7 +131,7 @@ module hook() {
     color("LimeGreen")
     // cut the disc in half.
     difference() {
-        polyRoundExtrude(tipRadii, thH, r, r, fn=20);
+        polyRoundExtrude(tipRadii, thH, r, r, fn=fnPolyRound);
         translate([-(l / 2), 0, 0])
         linear_extrude(thH) {
             polygon([
