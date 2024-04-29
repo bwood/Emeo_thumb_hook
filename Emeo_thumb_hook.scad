@@ -241,7 +241,7 @@ module platform () {
     // screw hole
     // radius: measure the raised area surrounding the hole on the plaform.
     shr = 3.5;
-    shDistFromTop = 14.5;
+    shDistFromTop = 12.3;
     translate([shDistFromTop + shr + 0.5, Pw2, Ph])
     cylinder(h = Hh + 1, r = shr);  
   
@@ -269,9 +269,9 @@ module hookBaseWithHook () {
     hookBase();
     
     // Place thumbhook.
-    rotate([0, 0, -40])
-    translate([10 + thH + cr1 + 1, 0, cheight - 12])
-    rotate([87, 0, 180 + 16])
+    rotate([0, 0, -35])
+    translate([10 + thH + cr1 + 1, 0, cheight - 14])
+    rotate([85, 0, 180 + 16])
     hook();
 }
 
