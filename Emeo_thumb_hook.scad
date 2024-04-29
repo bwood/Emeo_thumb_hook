@@ -269,7 +269,7 @@ module hookBaseWithHook () {
     hookBase();
     
     // Place thumbhook.
-    rotate([0, 0, -35])
+    rotate([0, 0, -30])
     translate([10 + thH + cr1 + 1, 0, cheight - 14])
     rotate([85, 0, 180 + 16])
     hook();
